@@ -1,9 +1,8 @@
 package com.bajpai.sorting;
-import java.util.Iterator;
+
 import java.util.Scanner;
 
 public class QuickSort {
-	// 0 - 9
 	public static void main(String args[]) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
@@ -18,9 +17,6 @@ public class QuickSort {
 		sc.close();
 	}
 
-	// So simply all element before i is less than pivot and at last pivot can
-	// replace with i
-	// We choose pivot as last element
 	public static void quickSort(int[] a, int l, int r) {
 		if (l < r) {
 			int pivot = partitionLeft(a, l, r);
@@ -33,41 +29,36 @@ public class QuickSort {
 
 	private static int partition(int[] a, int l, int r) {
 		int pivot = r;
-		int i = l; // i start from -1 index
+		int i = l;
 
 		for (int j = l; j <= r - 1; j++) {
 			if (a[pivot] > a[j]) {
-				// Swap
-				int t = a[i];
-				a[i] = a[j];
-				a[j] = t;
+				swap(a, i, j);
 				i++;
 			}
 		}
 
-		int t = a[i];
-		a[i] = a[pivot];
-		a[pivot] = t;
+		swap(a, i, pivot);
 
 		return i;
 	}
 
-	// Start index as partition
 	private static int partitionLeft(int[] a, int l, int r) {
 		int pivot = l;
 		int i = r;
 		for (int j = i; j > l; j--) {
 			if (a[pivot] < a[j]) {
-				int t = a[i];
-				a[i] = a[j];
-				a[j] = t;
+				swap(a, i, j);
 				i--;
 			}
 		}
-		int t = a[i];
-		a[i] = a[pivot];
-		a[pivot] = t;
-
+		swap(a, i, pivot);
 		return i;
+	}
+	
+	public static void swap(int[] a, int i, int j) {
+		int t = a[i];
+		a[i] = a[j];
+		a[j] = t;
 	}
 }
